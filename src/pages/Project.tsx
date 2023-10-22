@@ -16,7 +16,7 @@ const Project = () => {
     <>
       <div className="rounded w-11/12 flex flex-col gap-8 py-12 m-auto min-h-screen lg:w-3/4">
         <div className="flex flex-row justify-between items-center">
-          <span className="rounded text-xl text-slate-600 font-bold">
+          <span className="rounded text-2xl text-slate-600 font-bold">
             {handleProjects.name}
           </span>
           <div className="dropdown">
