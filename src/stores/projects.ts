@@ -38,10 +38,10 @@ export const useProjects = create<State & Actions>((set) => {
   return {
     open: localStorage.getItem('idkey') || '',
     setOpen: (id) => set((state) => {
-      localStorage.setItem('idkey', id);
+      localStorage.setItem('idkey', id ?? '');
       return {
         ...state,
-        open: id
+        open: id ?? ''
       }
     }),
     projects: JSON.parse(localStorage.getItem('localprojectkey')) || [
