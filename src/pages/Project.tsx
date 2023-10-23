@@ -55,7 +55,7 @@ const Project = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-12 lg:grid lg:grid-cols-3 lg:gap-8">
+        <div className="flex flex-col gap-12 md:grid md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           <TasksStatus
             projectid={handleProjects.id} // currently open na project
             todo={handleProjects.todo}

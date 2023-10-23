@@ -38,7 +38,7 @@ const ProjectsList = () => {
 
         <div className="flex flex-col gap-2">
           {projects.length > 0 ? (
-            <div className="flex flex-col lg:grid lg:grid-cols-3 gap-3">
+            <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-3">
               {handleProjects.map((m, index) => (
                 <Link to={`/project/${m.name.toLowerCase()}`} key={index}>
                   <div
@@ -51,7 +51,7 @@ const ProjectsList = () => {
                 </Link>
               ))}
               <button
-                className="hidden lg:block rounded bg-slate-50 p-4 text-slate-400 text-lg hover:text-slate-500 hover:bg-slate-100 hover:font-semibold"
+                className="hidden md:block rounded bg-slate-50 p-4 text-slate-400 text-lg hover:text-slate-500 hover:bg-slate-100 hover:font-semibold"
                 onClick={() => setShow(true)}
               >
                 <i className="fa-solid fa-plus"></i> Add New
