@@ -26,7 +26,7 @@ const ProjectsList = () => {
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 min-h-screen w-11/12 m-auto lg:w-3/5">
+      <div className="flex flex-col gap-6 w-11/12 m-auto lg:w-3/5" style={{minHeight:'70vh'}}>
 
         {/* <hr className="border-slate-400" /> */}
 
