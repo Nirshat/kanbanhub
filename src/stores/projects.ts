@@ -35,6 +35,8 @@ interface Actions {
 }
 
 export const useProjects = create<State & Actions>((set) => {
+
+
   return {
     open: localStorage.getItem('idkey') || '',
     setOpen: (id) => set((state) => {
@@ -44,15 +46,7 @@ export const useProjects = create<State & Actions>((set) => {
         open: id
       }
     }),
-    projects: [
-      {
-        id: 'dasdas',
-        name:'Project 1',
-        todo: [{cid:'xc3r1', task:'Develop components'}],
-        inpro: [{cid:'xc3r2', task:'Set-up project'}],
-        done: [{cid:'xc3r3', task:'Test api'}],
-      }
-    ],
+    projects: JSON.parse(localStorage.getItem('localprojectkey') || 'null') || [],
     setProjects: (propts) => set((state) => {
       const updatedProjects = [propts, ...state.projects];
       localStorage.setItem('localprojectkey', JSON.stringify(updatedProjects));
