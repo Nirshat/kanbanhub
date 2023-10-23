@@ -69,6 +69,22 @@ const EditTask = ({
     [input, updateTodo, updateInProgress, updateDone]
   );
 
+
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const handleKeyPress = (event:KeyboardEvent) => {
+    if (event.key === "Enter") {
+      buttonRef.current?.click();
+    }
+  };
+  useEffect(() => {
+    // Add an event listener to the document to listen for key presses
+    document.addEventListener("keydown", handleKeyPress);
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  },[]);
+
   return (
     <div className="rounded p-2 flex flex-col gap-2 border bg-slate-50">
       <div className="flex flex-col">
@@ -78,6 +94,7 @@ const EditTask = ({
         <input
           ref={inputRef}
           type="text"
+          maxLength={50}
           value={input}
           onChange={handleInput}
           className="p-2 rounded border border-slate-300 text-slate-800 bg-slate-100"
@@ -108,6 +125,7 @@ const EditTask = ({
           </button>
           {input.length > 0 ? (
             <button
+              ref={buttonRef}
               className="rounded p-1 bg-green-500 text-slate-100"
               onClick={() => handleUpdateTask(taskid, status,selectedStatus)}
             >

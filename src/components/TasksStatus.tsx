@@ -48,7 +48,13 @@ const TasksStatus = ({ projectid, todo, inpro, done }: StatusProps) => {
     <>
       {taskstatuses.map((taskstatus, index) => (
         <div className="rounded flex flex-col gap-3" key={index}>
-          <span className="font-semibold">{taskstatus.name}</span>
+
+          <div className="flex flex-row gap-2 items-center">
+            <span className="font-semibold">{taskstatus.name}</span>
+            <span className="font-semibold text-slate-400 text-sm">
+              ({taskstatus.tasks.length})
+            </span>
+          </div>
 
           {taskstatus.tasks.length > 0 ? (
             taskstatus.tasks.map((task, index) => {
@@ -86,7 +92,7 @@ const TasksStatus = ({ projectid, todo, inpro, done }: StatusProps) => {
               className="rounded bg-slate-50 text-start p-3 text-slate-400 hover:text-slate-700 hover:border hover:border-slate-400"
               onClick={() => handleOpenForm(taskstatus.stat)}
             >
-              <i className="fa-solid fa-plus"></i> Add New
+              <i className="fa-solid fa-plus text-sm"></i> Add New
             </button>
           )}
         </div>

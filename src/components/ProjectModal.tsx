@@ -28,6 +28,21 @@ const ProjectModal = ({ projectid, title }: ProjectStates) => {
     updateProjectTitle(projectid, input);
   }, [input]);
 
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      buttonRef.current?.click();
+    }
+  };
+  useEffect(() => {
+    // Add an event listener to the document to listen for key presses
+    document.addEventListener("keydown", handleKeyPress);
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -71,14 +86,22 @@ const ProjectModal = ({ projectid, title }: ProjectStates) => {
               >
                 Close
               </button>
-              <button
+              {input.length > 0 ? (<button
+                ref={buttonRef}
                 type="button"
                 className="rounded bg-green-500 py-2 px-3 text-slate-100"
                 onClick={handleupdateProjectTitle}
                 data-bs-dismiss="modal"
               >
                 Save
-              </button>
+              </button>) : (<button
+                disabled
+                type="button"
+                className="rounded bg-slate-200 py-2 px-3 text-slate-400"
+              >
+                Save
+              </button>)}
+            
             </div>
           </div>
         </div>

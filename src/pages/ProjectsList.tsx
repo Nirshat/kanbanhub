@@ -16,43 +16,64 @@ const ProjectsList = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-6 min-h-screen justify-center w-11/12 m-auto py-12 lg:w-3/5">
-        <div className="rounded flex flex-row justify-between items-center">
-          <span className="rounded text-2xl font-semibold">
-            Projects Boards
-          </span>
-          <button
-            className="hidden md:block rounded bg-green-500 text-slate-50 py-2 px-3"
-            onClick={() => setShow(true)}
-          >
-            <i className="fa-solid fa-plus"></i> Add New
-          </button>
+      <div className="w-11/12 lg:w-3/5 m-auto pt-20 pb-12">
+        <div className="text-4xl font-bold">
+          <span className="text-green-500">Kanban</span>
+          <span className="text-slate-600">Hub</span>
         </div>
+        <p className="text-sm">
+          Navigating Agile Workflows with KanbanHub.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-6 min-h-screen w-11/12 m-auto lg:w-3/5">
 
         {/* <hr className="border-slate-400" /> */}
 
-        <div className="flex flex-col gap-3">
+        <div className="rounded">
+          <span className="rounded text-xl font-semibold text-slate-600">
+            Projects Boards
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-2">
           {projects.length > 0 ? (
-            handleProjects.map((m, index) => (
-              <Link to={`/project/${m.name.toLowerCase()}`} key={index}>
-                <div
-                  className="rounded border bg-slate-100 p-4 flex flex-row justify-between items-center text-slate-600 text-lg"
-                  onClick={() => setOpen(m.id)}
-                >
-                  {m.name}
-                  <i className="fa-solid fa-folder text-slate-500"></i>
-                </div>
-              </Link>
-            ))
+            <div className="flex flex-col lg:grid lg:grid-cols-3 gap-3">
+              {handleProjects.map((m, index) => (
+                <Link to={`/project/${m.name.toLowerCase()}`} key={index}>
+                  <div
+                    className="rounded border bg-slate-100 p-4 flex flex-row justify-between items-center text-slate-600 text-lg"
+                    onClick={() => setOpen(m.id)}
+                  >
+                    {m.name}
+                    <i className="fa-solid fa-folder text-slate-500"></i>
+                  </div>
+                </Link>
+              ))}
+              <button
+                className="hidden lg:block rounded bg-slate-50 p-4 text-slate-400 text-lg hover:text-slate-500 hover:bg-slate-100 hover:font-semibold"
+                onClick={() => setShow(true)}
+              >
+                <i className="fa-solid fa-plus"></i> Add New
+              </button>
+            </div>
           ) : (
-            <NoProject />
+            <div className="flex flex-col lg:grid lg:grid-cols-3 gap-3">
+              <NoProject/>
+              <button
+                className="hidden lg:block rounded bg-slate-50 p-4 text-slate-400 text-lg hover:text-slate-500 hover:bg-slate-100 hover:font-semibold"
+                onClick={() => setShow(true)}
+              >
+                <i className="fa-solid fa-plus"></i> Add New
+              </button>
+            </div>
           )}
 
           <button
-            className="rounded md:hidden bg-green-500 text-slate-100 font-semibold py-3"
+            className="rounded mt-3 md:hidden bg-green-500 text-slate-100 font-semibold py-4"
             onClick={() => setShow(true)}
           >
-            Add New
+            <i className="fa-solid fa-plus"></i> Add New
           </button>
         </div>
       </div>

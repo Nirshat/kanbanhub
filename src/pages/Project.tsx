@@ -3,14 +3,16 @@ import { useProjects } from "../stores/projects";
 import TasksStatus from "../components/TasksStatus";
 import { Link } from "react-router-dom";
 import ProjectModal from "../components/ProjectModal";
+import DeleteProjectModal from "../components/DeleteProjectModal";
 
 const Project = () => {
-  const { open, projects, deleteProject } = useProjects();
+  const { open, projects} = useProjects();
 
   const handleProjects = useMemo(() => {
     const filterItems = projects.filter((project) => project.id == open);
     return filterItems[0];
   }, [projects]);
+  
 
   return (
     <>
@@ -42,12 +44,13 @@ const Project = () => {
               >
                 <span className="dropdown-item">Edit Title</span>
               </li>
-              <Link to="/"
-                onClick={() => deleteProject(handleProjects.id)}
+              <li
                 className="cursor-pointer"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteprojectmodal"
               >
                 <span className="dropdown-item">Delete this project</span>
-              </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -63,6 +66,7 @@ const Project = () => {
       </div>
 
       <ProjectModal projectid={handleProjects.id} title={handleProjects.name} />
+      <DeleteProjectModal projectid={handleProjects.id} />
     </>
   );
 };

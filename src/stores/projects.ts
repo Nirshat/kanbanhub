@@ -47,6 +47,8 @@ export const useProjects = create<State & Actions>((set) => {
       }
     }),
     projects: JSON.parse(localStorage.getItem('localprojectkey') || 'null') || [],
+    // This code will check if the value in localStorage is null and then parse it as a JSON string. If the parsing results in null, it will return an empty array []. This ensures that the code is both safe from type errors and can handle the case when the localStorage value is missing or not valid JSON.
+
     setProjects: (propts) => set((state) => {
       const updatedProjects = [propts, ...state.projects];
       localStorage.setItem('localprojectkey', JSON.stringify(updatedProjects));
@@ -82,7 +84,7 @@ export const useProjects = create<State & Actions>((set) => {
     setTodos:(key, id, taskdesc) => set((state) => {
       const updatedProjects = state.projects.map((project) => {
         if(project.id === key){
-          project.todo = [{cid: id, task:taskdesc}, ...project.todo];
+          project.todo = [...project.todo, {cid: id, task:taskdesc}];
         }
         return project
       });
@@ -133,7 +135,7 @@ export const useProjects = create<State & Actions>((set) => {
     setInProgress:(key, id, taskdesc) => set((state) => {
       const updatedProjects = state.projects.map((project) => {
         if(project.id === key){
-          project.inpro = [{cid:id, task:taskdesc}, ...project.inpro];
+          project.inpro = [...project.inpro, {cid:id, task:taskdesc},];
         }
         return project
       });
@@ -184,7 +186,7 @@ export const useProjects = create<State & Actions>((set) => {
     setDone:(key, id, taskdesc) => set((state) => {
       const updatedProjects = state.projects.map((project) => {
         if(project.id === key){
-          project.done = [{cid:id, task:taskdesc}, ...project.done];
+          project.done = [...project.done, {cid:id, task:taskdesc}];
         }
         return project
       });
@@ -235,7 +237,7 @@ export const useProjects = create<State & Actions>((set) => {
     moveInTodo: (key, currentStat, id, taskdesc) => set((state) => {
       const updatedProjects = state.projects.map((project) => {
         if(project.id === key){
-          const newTodo = [{cid:id, task:taskdesc}, ...project.todo];
+          const newTodo = [...project.todo, {cid:id, task:taskdesc}];
           if(currentStat === 'inprogress'){ // always true
             const removeInWIP = project.inpro.filter((item) => item.cid != id); 
             return {...project, todo: newTodo, inpro:[...removeInWIP]}
@@ -256,7 +258,7 @@ export const useProjects = create<State & Actions>((set) => {
     moveToWIP: (key, currentStat, id, taskdesc) => set((state) => {
       const updatedProjects = state.projects.map((project) => {
         if(project.id === key){
-          const newInProgress = [{cid:id, task:taskdesc}, ...project.inpro];
+          const newInProgress = [...project.inpro, {cid:id, task:taskdesc}];
           if(currentStat === 'todos'){ // always true
             const removeInTodo = project.todo.filter((item) => item.cid != id); 
             return {...project, inpro: newInProgress, todo:[...removeInTodo]}
@@ -277,7 +279,7 @@ export const useProjects = create<State & Actions>((set) => {
     moveToDone: (key, currentStat, id, taskdesc) => set((state) => {
       const updatedProjects = state.projects.map((project) => {
         if(project.id === key){
-          const newDone = [{cid:id, task:taskdesc}, ...project.done];
+          const newDone = [...project.done, {cid:id, task:taskdesc}];
           if(currentStat === 'todos'){ // always true
             const removeInTodo = project.todo.filter((item) => item.cid != id); 
             return {...project, done: newDone, todo:[...removeInTodo]}
